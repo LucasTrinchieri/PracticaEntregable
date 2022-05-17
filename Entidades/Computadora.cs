@@ -9,12 +9,12 @@ namespace Entidades
     public class Computadora : Dispositivo
     {
         public string Procesador { get; set; }
-        public RAM RAM { get; set; }
+        public RAM Ram { get; set; }
         public string Fabricante { get; set; }
 
         public override string ObtenerDescripcion()
         {
-            return $" PC {Modelo} - {Marca} - {Procesador} - {(int)RAM} RAM - {Fabricante}";
+            return $" PC {Modelo} - {Marca} - {Procesador} - {(int)Ram} RAM - {Fabricante}";
         }
 
         public Computadora()
@@ -22,12 +22,12 @@ namespace Entidades
 
         }
 
-        public Computadora(string marca, string modelo, int nroSerie, string cpu, RAM ram, string fabricante)
+        public Computadora(string marca, string modelo, int nroSerie, string cpu, short ram, string fabricante)
         {
             base.CargarDatos(marca, modelo, nroSerie);
             Procesador = cpu;
             Fabricante = fabricante;
-            RAM = ram;
+            Ram = (RAM)ram;
         }
     }
 

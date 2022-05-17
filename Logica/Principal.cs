@@ -14,7 +14,7 @@ namespace Logica
 
         private Principal() { }
 
-        public static Principal principal
+        public static Principal Intancia
         {
             get
             {
@@ -31,42 +31,53 @@ namespace Logica
 
         public EventHandler<AgregarEliminar> agregarEliminar;
 
-        public void Evento(Dispositivo dispositivo)
+        public void Evento(string id, Tipo tipo)
         {
             this.agregarEliminar(this, new AgregarEliminar()
             {
-                Id = dispositivo.Id,
-                Tipo = dispositivo.GetType() == typeof(Pantalla) ? Tipo.Monitor : Tipo.Computadora
+                Id = id,
+                Tipo = tipo
             });
         }
 
-        public void Agregar(Pantalla monitor)
+        public void Agregar(string marca, string modelo, int nroSerie, int año, int pulgadas)
         {
-            Pantallas.Add(monitor);
-            Evento(monitor);
+            Pantalla pantalla = new Pantalla(marca, modelo, nroSerie, año, pulgadas);
+
+            Pantallas.Add(pantalla);
+            Evento(pantalla.Id, Tipo.Monitor);
         }
 
-        public void Agregar(Computadora computadora)
+        public void Agregar(string marca, string modelo, int nroSerie, string cpu, short ram, string fabricante)
         {
+            Computadora computadora = new Computadora(marca, modelo, nroSerie, cpu, ram, fabricante);
+
             Computadoras.Add(computadora);
-            Evento(computadora);
+            Evento(computadora.Id, Tipo.Computadora);
         }
 
         public void Eliminar(string id)
         {
+            Tipo tipo;
+
             if(Buscar(id) != null)
             {
                 if (Buscar(id).GetType() == typeof(Pantalla))
                 {
                     Pantallas.Remove((Pantalla)Buscar(id));
+                    tipo = Tipo.Monitor;
                 }
                 else
                 {
                     Computadoras.Remove((Computadora)Buscar(id));
+                    tipo = Tipo.Computadora;
                 }
+                Evento(id, tipo);
             }
-
-            Evento(Buscar(id));
+            else
+            {
+                throw new Exception(" El ID pasado no existe");
+            }
         }
 
         public string ObtenerDescripcion(string id)
@@ -84,7 +95,7 @@ namespace Logica
             return lista.OrderBy(x => x.GetType()).ToList();
         }
 
-        public Dispositivo Buscar(string id)
+        private Dispositivo Buscar(string id)
         {
             return ObtenerLista().FirstOrDefault( x => x.Id == id);
         }
