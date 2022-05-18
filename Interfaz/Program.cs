@@ -42,7 +42,7 @@ namespace Interfaz
                 Console.ReadKey();
                 Console.Clear();
 
-                CargarTitulo();
+                accion = CargarTitulo();
             }
 
             Console.ReadKey();
@@ -125,8 +125,9 @@ namespace Interfaz
         {
             Console.WriteLine($" Producto eliminado/agregado:");
             Console.WriteLine($"{Principal.Intancia.ObtenerDescripcion(a.Id)}");
-
-            //Console.WriteLine($"{Principal.Intancia.ObtenerLista()}");
+            Console.WriteLine($" Computadoras: {Principal.Intancia.ObtenerCantidadPC()} / Monitores: {Principal.Intancia.ObtenerCantidadPantallas()}");
+            Console.WriteLine($" Monitores: {Principal.Intancia.ObtenerCantidadPantallas() / Principal.Intancia.ObtenerCantidadDispositivos() * 100}%");
+            Console.WriteLine($" Computadoras: {Principal.Intancia.ObtenerCantidadPC() / Principal.Intancia.ObtenerCantidadDispositivos() * 100}%");
         }
     }
 }

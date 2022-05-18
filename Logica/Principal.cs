@@ -26,8 +26,21 @@ namespace Logica
             }
         }
 
-        static List<Pantalla> Pantallas = new List<Pantalla>();
-        static List<Computadora> Computadoras = new List<Computadora>();
+        private List<Pantalla> Pantallas = new List<Pantalla>();
+        private List<Computadora> Computadoras = new List<Computadora>();
+
+        public int ObtenerCantidadPantallas()
+        {
+            return Pantallas.Count();
+        }
+        public int ObtenerCantidadPC()
+        {
+            return Computadoras.Count();
+        }
+        public int ObtenerCantidadDispositivos()
+        {
+            return ObtenerLista().Count();
+        }
 
         public EventHandler<AgregarEliminar> agregarEliminar;
 
