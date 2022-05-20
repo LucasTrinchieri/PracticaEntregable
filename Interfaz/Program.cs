@@ -42,10 +42,28 @@ namespace Interfaz
                 Console.ReadKey();
                 Console.Clear();
 
+
+
                 accion = CargarTitulo();
             }
 
             Console.ReadKey();
+        }
+
+        public static void MostrarProductos()
+        {
+            Console.Write(" Mostrar productos: S || No mostrar: N");
+            string mostrar = Console.ReadLine().ToUpper();
+
+            if (mostrar == "S")
+            {
+                Mostrar();
+            }
+        }
+
+        private static void Mostrar()
+        {
+            //
         }
 
         public static void CargarMonitor()
