@@ -42,6 +42,11 @@ namespace Logica
             return ObtenerLista().Count();
         }
 
+        public List<string> ObtenerListaString()
+        {
+            return ObtenerLista().Select(x => x.ObtenerDescripcion()).ToList();
+        }
+
         public EventHandler<AgregarEliminar> agregarEliminar;
 
         public void Evento(string id, Tipo tipo)
@@ -98,14 +103,14 @@ namespace Logica
             return Buscar(id).ObtenerDescripcion();
         }
 
-        public List<Dispositivo> ObtenerLista()
+        private List<Dispositivo> ObtenerLista()
         {
             List<Dispositivo> lista = new List<Dispositivo>();
 
             lista.AddRange(Computadoras);
             lista.AddRange(Pantallas);
 
-            return lista.OrderBy(x => x.GetType()).ToList();
+            return lista.OrderBy(x => x.GetType() == typeof(Pantalla)).ToList();
         }
 
         private Dispositivo Buscar(string id)

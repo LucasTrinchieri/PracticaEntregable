@@ -39,10 +39,10 @@ namespace Interfaz
                         break;
                 }
 
+                MostrarProductos();
+
                 Console.ReadKey();
                 Console.Clear();
-
-
 
                 accion = CargarTitulo();
             }
@@ -63,7 +63,16 @@ namespace Interfaz
 
         private static void Mostrar()
         {
-            //
+            foreach (string item in Principal.Intancia.ObtenerListaString())
+            {
+                if(item == Principal.Intancia.ObtenerListaString().Last())
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+
+                Console.WriteLine(item);
+                Console.ForegroundColor = ConsoleColor.White;
+            }
         }
 
         public static void CargarMonitor()
